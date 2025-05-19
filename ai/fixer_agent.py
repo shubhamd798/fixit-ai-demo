@@ -9,7 +9,7 @@ def get_fix(prompt):
     genai.configure(api_key=api_key)
 
     model = genai.GenerativeModel("gemini-pro")
-    print(f"✅ Using Gemini model: {model.model_name}")  # <-- debug print
+    print(f"✅ Using Gemini model: {model.model_name}")
 
     response = model.generate_content(prompt)
     return response.text.strip()
