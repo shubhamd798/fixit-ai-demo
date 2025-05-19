@@ -15,7 +15,7 @@ def get_fix(prompt, code_context):
     print("=" * 30)
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an expert DevOps engineer and Python developer."},
             {"role": "user", "content": prompt}
