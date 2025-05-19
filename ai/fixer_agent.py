@@ -6,11 +6,11 @@ def get_fix(prompt):
     if not api_key:
         raise EnvironmentError("GEMINI_API_KEY not set in environment variables.")
 
-    # ✅ Use the correct API version
-    genai.configure(api_key=api_key, transport="rest")  # important for GitHub runners
+    # Correct configuration
+    genai.configure(api_key=api_key)
 
-    # ✅ Use the correct model
-    model = genai.GenerativeModel(model_name="models/gemini-pro")
+    # Use Gemini Pro with latest default (v1) API
+    model = genai.GenerativeModel("gemini-pro")
 
     response = model.generate_content(prompt)
     return response.text.strip()
