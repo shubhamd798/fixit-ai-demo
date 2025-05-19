@@ -1,8 +1,4 @@
-import os
-import re
-import google.generativeai as genai
-
-def get_fix(prompt):
+def get_fix(prompt, code_context):
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise EnvironmentError("GEMINI_API_KEY not set in environment variables.")
@@ -18,7 +14,7 @@ def get_fix(prompt):
     response = model.generate_content(prompt)
     fix = response.text.strip()
 
-    match = re.search(r'def (\w+)\(', prompt)
+    match = re.search(r'def (\w+)\(', code_context['snippet'])
     if match:
         expected_func = match.group(1)
         if expected_func not in fix:

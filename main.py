@@ -20,7 +20,8 @@ def run_fixit():
 
     error_log = extract_error_from_logs(failure_info["log_url"])
     prompt = build_prompt(error_log, failure_info["code_context"])
-    suggested_fix = get_fix(prompt)
+    suggested_fix = get_fix(prompt, failure_info["code_context"])
+
 
     pr_url = create_pull_request(suggested_fix)
     print(f"✅ Fix submitted via PR: {pr_url}")
