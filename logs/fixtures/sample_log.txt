@@ -1,0 +1,7 @@
+
+Traceback (most recent call last):
+  File "app.py", line 42, in <module>
+    result = process_order("ABC123")
+  File "app.py", line 20, in process_order
+    return order_id + 1
+TypeError: can only concatenate str (not "int") to str
