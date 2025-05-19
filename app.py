@@ -1,4 +1,4 @@
-def square_root(x)
-    return math.sqrt(x)  # missing import
+import math
 
-print(square_root(16))
+def area(r):
+    return math.pi * r ** 2
