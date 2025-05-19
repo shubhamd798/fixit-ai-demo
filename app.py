@@ -1,4 +1,2 @@
-import math
-
 def area(r):
-    return math.pi * r ** 2
+    return math.pi * r ** 2  # without import math
