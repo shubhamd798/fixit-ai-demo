@@ -1,0 +1,9 @@
+openai
+requests
+pyyaml
+python-dotenv
+gitpython
+PyGithub
+python-gitlab
+google-generativeai
+anthropic
