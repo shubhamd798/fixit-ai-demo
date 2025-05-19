@@ -8,8 +8,8 @@ def get_fix(prompt):
 
     genai.configure(api_key=api_key)
 
-    model = genai.GenerativeModel("gemini-pro")
-    print(f"✅ Using Gemini model: {model.model_name}")
+    # Use a stable, supported model
+    model = genai.GenerativeModel("models/gemini-1.5-flash")
 
     response = model.generate_content(prompt)
     return response.text.strip()
