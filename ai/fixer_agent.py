@@ -1,10 +1,12 @@
+import os
 import re
+import google.generativeai as genai
 
 def get_fix(prompt):
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise EnvironmentError("GEMINI_API_KEY not set in environment variables.")
-    
+
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("models/gemini-1.5-flash")
 
@@ -16,8 +18,6 @@ def get_fix(prompt):
     response = model.generate_content(prompt)
     fix = response.text.strip()
 
-    # 🛡️ Ensure the fix contains the original function name
-    import re
     match = re.search(r'def (\w+)\(', prompt)
     if match:
         expected_func = match.group(1)
