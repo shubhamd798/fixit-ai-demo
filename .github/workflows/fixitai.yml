@@ -33,4 +33,4 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run FixIt.AI
-      run: python main.py
+      run: python FIXITAI/main.py
