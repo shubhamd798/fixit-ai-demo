@@ -1,20 +1,20 @@
 import os
 import re
-import openai
+from openai import OpenAI
 
 def get_fix(prompt, code_context):
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise EnvironmentError("OPENAI_API_KEY not set in environment variables.")
 
-    openai.api_key = api_key
+    client = OpenAI(api_key=api_key)
 
     print("🔍 Prompt sent to OpenAI:")
     print("=" * 30)
     print(prompt)
     print("=" * 30)
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "You are an expert DevOps engineer and Python developer."},
@@ -23,9 +23,9 @@ def get_fix(prompt, code_context):
         temperature=0.2
     )
 
-    fix = response.choices[0].message["content"].strip()
+    fix = response.choices[0].message.content.strip()
 
-    # Validate function name exists
+    # Validate expected function exists
     match = re.search(r'def (\w+)\(', code_context['snippet'])
     if match:
         expected_func = match.group(1)
