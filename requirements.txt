@@ -7,3 +7,4 @@ PyGithub
 python-gitlab
 google-generativeai
 anthropic
+openai>=1.0.0
