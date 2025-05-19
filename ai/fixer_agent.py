@@ -1,30 +1,35 @@
 import os
 import re
-import google.generativeai as genai
+import openai
 
 def get_fix(prompt, code_context):
-    api_key = os.getenv("GEMINI_API_KEY")
+    api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        raise EnvironmentError("GEMINI_API_KEY not set in environment variables.")
+        raise EnvironmentError("OPENAI_API_KEY not set in environment variables.")
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("models/gemini-1.5-flash")
+    openai.api_key = api_key
 
-    # 🔍 Log the prompt sent to Gemini
-    print("🔍 Prompt sent to Gemini:")
+    print("🔍 Prompt sent to OpenAI:")
     print("=" * 30)
     print(prompt)
     print("=" * 30)
 
-    # 🔧 Generate fix from Gemini
-    response = model.generate_content(prompt)
-    fix = response.text.strip()
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an expert DevOps engineer and Python developer."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.2
+    )
 
-    # 🛡️ Validate that Gemini fixed the correct function
+    fix = response.choices[0].message["content"].strip()
+
+    # Validate function name exists
     match = re.search(r'def (\w+)\(', code_context['snippet'])
     if match:
         expected_func = match.group(1)
         if expected_func not in fix:
-            raise ValueError(f"❌ Fix does not include original function: `{expected_func}`. Gemini output was:\n{fix}")
+            raise ValueError(f"❌ Fix does not include original function: `{expected_func}`. OpenAI output was:\n{fix}")
 
     return fix

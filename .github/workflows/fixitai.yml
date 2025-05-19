@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-    #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      # GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       GITHUB_TOKEN: ${{ secrets.FIXIT_AI_TOKEN }}
       GITHUB_REPO: shubhamd798/fixit-ai-demo
       GITHUB_BRANCH: fixit-ai-bot-patch
