@@ -1,5 +1,4 @@
-defcalculate_area(radius)
-    return math.pi * radius ** 2  # <== still missing import
+def square_root(x):
+    return math.sqrt(x)  # missing import
 
-print("Area:", calculate_area(5))
-
+print(square_root(16))
